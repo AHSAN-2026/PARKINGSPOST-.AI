@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - ParkingSpot AI</title>
+  
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Responsive Stylesheet -->
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <style>
+    /* Dashboard-specific Grid Layouts */
+    .dashboard-hero {
+      background-color: var(--color-white);
+      border-bottom: var(--border-grid);
+      padding: 40px 0;
+    }
+    
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      padding: 60px 0;
+    }
+    
+    .dashboard-section-title {
+      font-size: 1.15rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: var(--border-grid);
+    }
+    
+    .dashboard-panel {
+      margin-bottom: 3rem;
+    }
+    
+    /* Tables style for history log */
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .history-table th {
+      padding: 1rem 0;
+      border-bottom: 2px solid var(--color-dark);
+      font-family: var(--font-headings);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--color-secondary);
+    }
+    
+    /* Favorites Card items */
+    .favorites-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    /* User profile details display */
+    .profile-card {
+      background: var(--color-white);
+      border: var(--border-grid);
+      padding: 2rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic injected Header Navbar -->
+  <header></header>
+
+  <!-- User Portal Hero Summary banner -->
+  <section class="dashboard-hero">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap:1.5rem;">
+        <div>
+          <span style="font-size: 0.8rem; font-weight:700; text-transform: uppercase; letter-spacing:0.05em; color:var(--color-primary)">User Portal</span>
+          <h1 id="profile-name" style="font-size: 2.5rem; margin-top:0.25rem;">Alex Driver</h1>
+          <p id="profile-email" class="text-muted" style="font-size: 0.9rem;">test@parking.ai</p>
+        </div>
+        <div style="display:flex; gap: 2rem; border-left: var(--border-grid); padding-left: 2rem;">
+          <div>
+            <span class="text-muted" style="display:block; font-size:0.75rem; text-transform:uppercase; font-weight:600;">Booking Status</span>
+            <span style="font-family: var(--font-headings); font-weight:800; font-size:1.5rem; color:#2E7D32">Active</span>
+          </div>
+          <div>
+            <span class="text-muted" style="display:block; font-size:0.75rem; text-transform:uppercase; font-weight:600;">Loyalty Level</span>
+            <span style="font-family: var(--font-headings); font-weight:800; font-size:1.5rem;">PRO MEMBER</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Portal Contents Grid -->
+  <main class="container">
+    <div class="dashboard-layout">
+      
+      <!-- Primary column: Active Booking & Booking History -->
+      <section class="dashboard-main-col">
+        
+        <!-- Active Booking Panel -->
+        <div class="dashboard-panel">
+          <h3 class="dashboard-section-title">Active Reservation</h3>
+          <div id="dashboard-active-booking" style="display: flex;">
+            <!-- Rendered dynamically by dashboard.js -->
+            <div class="flex-center" style="width:100%; height: 150px; background:var(--color-white); border:var(--border-grid)">
+              <span>Checking sensors...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- History Log Panel -->
+        <div class="dashboard-panel">
+          <h3 class="dashboard-section-title">Reservation History</h3>
+          <div style="background-color: var(--color-white); border: var(--border-grid); padding: 2rem; border-radius: var(--radius-sm); overflow-x: auto;">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Parking Location</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-history-list">
+                <!-- Rendered dynamically by dashboard.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Sidebar column: Favorites list & Profile forms -->
+      <section class="dashboard-sidebar-col" id="dashboard-details-section">
+        
+        <!-- Favorites Spot List -->
+        <div class="dashboard-panel">
+          <h3 class="dashboard-section-title">Saved Locations</h3>
+          <div id="dashboard-favorites" class="favorites-list">
+            <!-- Rendered dynamically by dashboard.js -->
+          </div>
+        </div>
+
+        <!-- Profile Update Box -->
+        <div class="dashboard-panel">
+          <h3 class="dashboard-section-title">Update Profile</h3>
+          <div class="profile-card">
+            <form id="profile-form">
+              <div class="form-group">
+                <label class="form-label" for="profile-edit-name">Display Name</label>
+                <input type="text" id="profile-edit-name" class="form-input" required placeholder="New Name">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profile-edit-password">New Password</label>
+                <input type="password" id="profile-edit-password" class="form-input" placeholder="•••••••• (Optional)">
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm" style="width:100%; margin-top: 1rem;">Update Details</button>
+            </form>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Dynamic injected Footer -->
+  <footer></footer>
+
+  <!-- Javascript Modules -->
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

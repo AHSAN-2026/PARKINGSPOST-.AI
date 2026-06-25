@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ParkingSpot AI - Smart Parking Discovery</title>
+  
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Responsive Stylesheet -->
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <style>
+    /* Homepage Specific Premium Layouts */
+    .hero-section {
+      padding: 100px 0;
+      border-bottom: var(--border-grid);
+    }
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-headline {
+      font-size: 4.5rem;
+      margin-bottom: 2rem;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--color-secondary);
+      margin-bottom: 3rem;
+      max-width: 500px;
+    }
+    .hero-search-box {
+      background-color: var(--color-white);
+      border: var(--border-grid);
+      padding: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      max-width: 520px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-soft);
+    }
+    .hero-search-box input {
+      flex: 1;
+      border: none;
+      padding: 0 1rem;
+      font-size: 1rem;
+    }
+    .hero-search-box input:focus {
+      outline: none;
+    }
+    .hero-visual {
+      border: var(--border-grid);
+      background-color: var(--color-white);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      position: relative;
+      overflow: hidden;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .visual-top-bar {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: var(--border-grid);
+      padding-bottom: 1rem;
+      font-family: var(--font-headings);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+      border-bottom: var(--border-grid);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .stat-card {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-right: var(--border-grid);
+    }
+    .stat-card:last-child {
+      border-right: none;
+    }
+    .stat-num {
+      font-family: var(--font-headings);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.03em;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--color-secondary);
+    }
+
+    /* Features Grid */
+    .features-section {
+      padding: 100px 0;
+      border-bottom: var(--border-grid);
+    }
+    .features-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+    .features-header h2 {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+    }
+    .features-header p {
+      color: var(--color-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .feature-card {
+      background-color: var(--color-white);
+      border: var(--border-grid);
+      padding: 3rem 2rem;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-smooth);
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--color-primary);
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--color-primary);
+    }
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card p {
+      color: var(--color-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Testimonials Grid */
+    .testimonials-section {
+      padding: 100px 0;
+      background-color: #EAE5DC;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .testimonial-card {
+      background-color: var(--bg-primary);
+      border: var(--border-grid);
+      padding: 3rem;
+      border-radius: var(--radius-sm);
+    }
+    .testimonial-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: 2rem;
+      color: var(--color-dark);
+      font-weight: 500;
+    }
+    .testimonial-author {
+      font-family: var(--font-headings);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Mock UI details inside visual box */
+    .mock-visual-content {
+      padding: 2rem 0;
+    }
+    .mock-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border: var(--border-grid);
+      background: var(--bg-primary);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.75rem;
+    }
+    .mock-list-item strong {
+      font-family: var(--font-headings);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Injected dynamically by app.js -->
+  <header></header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-layout">
+      <div class="hero-text">
+        <h1 class="hero-headline">Find Parking.<br>Instantly.</h1>
+        <p class="hero-desc">
+          Say goodbye to block circling. Locate, reserve, and navigate to real-time available parking spaces across major metropolitan districts.
+        </p>
+        
+        <form class="hero-search-box" action="search.html" method="GET">
+          <input type="text" name="q" placeholder="Enter city, district or specific lot..." required>
+          <button type="submit" class="btn btn-primary">Find Spaces</button>
+        </form>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-top-bar">
+          <span>📍 LIVE METROPOLITAN FEED</span>
+          <span class="text-primary">● LIVE SENSORS</span>
+        </div>
+        <div class="mock-visual-content">
+          <div class="mock-list-item">
+            <div>
+              <strong>Satoshi Plaza</strong>
+              <div style="font-size:0.75rem; color:#6B6B6B">Financial District</div>
+            </div>
+            <span class="badge badge-nearly-full">4 Available</span>
+          </div>
+          <div class="mock-list-item">
+            <div>
+              <strong>Sleek Industrial Garages</strong>
+              <div style="font-size:0.75rem; color:#6B6B6B">Tech District</div>
+            </div>
+            <span class="badge badge-available">18 Available</span>
+          </div>
+          <div class="mock-list-item" style="opacity: 0.6">
+            <div>
+              <strong>Inter-City Express Lot</strong>
+              <div style="font-size:0.75rem; color:#6B6B6B">Transit Hub</div>
+            </div>
+            <span class="badge badge-full">Full</span>
+          </div>
+        </div>
+        <div style="font-size:0.8rem; border-top: var(--border-grid); padding-top: 1rem; text-align: center; color: var(--color-secondary)">
+          Integrated with Leaflet.js Mapping Systems
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Statistics Section -->
+  <section class="stats-section grid-border-y">
+    <div class="container stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">1,240+</div>
+        <div class="stat-label">Spots Registered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">45K+</div>
+        <div class="stat-label">Reservations Done</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">98.2%</div>
+        <div class="stat-label">Drivers Satisfaction</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <div class="features-header">
+        <h2>Built for Urban Mobility</h2>
+        <p>A minimalist design meeting high-performance technology to streamline parking spaces search.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📡</div>
+          <h3>IoT Live Sensors</h3>
+          <p>Parking spaces report available vacancies in real-time, refreshed every 30 seconds to guarantee vacancy accuracy.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💳</div>
+          <h3>Secure Reservations</h3>
+          <p>Reserve slots in advance and pay online securely through UPI, Credit Cards, or mobile Wallets.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🗺️</div>
+          <h3>Interactive Navigation</h3>
+          <p>Interactive mapping paths guide you directly from your current GPS coordinates to your reserved space.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section grid-border-y">
+    <div class="container">
+      <div class="features-header">
+        <h2>Commuter Endorsements</h2>
+        <p>See what modern city drivers have to say about the ParkingSpot AI interface.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "ParkingSpot AI cut my daily commute search time from 20 minutes to zero. I book my spot at Neue Montreal Deck before I even hit the highway."
+          </p>
+          <div class="testimonial-author">
+            - Marcus Vance, Daily Commuter
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "The minimalist layout fits the curve of modern tech design. Map loading is instantaneous, and the checkout timers work flawlessly."
+          </p>
+          <div class="testimonial-author">
+            - Sophia Chen, Product Architect
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Injected dynamically by app.js -->
+  <footer></footer>
+
+  <!-- Core Javascript imports -->
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
